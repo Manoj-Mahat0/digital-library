@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <title>Homepage</title>
+    <!-- Include any CSS or Bootstrap links here -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <style>
+        /* Custom styles for the circular cart button */
+        .fixed {
+            position: fixed;
+        }
+
+        .bottom-6 {
+            bottom: 1.5rem; /* Adjust as needed */
+        }
+
+        .right-6 {
+            right: 1.5rem; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    {% include 'navbar.html' %}
+    {% include 'bag.html' %}
+
+    
+    <!-- Include the carousel component -->
+    {% include 'carousel.html' %}
+
+    {% include 'adds.html' %}
+    
+    <!-- Include the gallery component -->
+    {% include 'gallery.html' %}
+
+    {% include 'team.html' %}
+    
+    {% include 'footer.html' %}
+    
+    <!-- Include any additional scripts here -->
+</body>
+</html>

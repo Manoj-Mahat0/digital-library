@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <title>Add New Book</title>
+    <!-- Include any CSS or Bootstrap links here -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <script>
+        function validateForm() {
+            // Get form fields
+            var bookName = document.getElementById('book_name').value;
+            var publisher = document.getElementById('publisher').value;
+            var bookAuthor = document.getElementById('book_author').value;
+            var isbnNo = document.getElementById('isbn_no').value;
+            var registrationDate = document.getElementById('registration_date').value;
+            var available = document.getElementById('available').value;
+            var price = document.getElementById('price').value;
+            
+            // Check if any field is empty
+            if (bookName === '' || publisher === '' || bookAuthor === '' || isbnNo === '' || registrationDate === '' || available === '' || price === '') {
+                alert('Please fill in all required fields.');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function showMessage(message) {
+            alert(message);
+        }
+    </script>
+  </head>
+<body>
+    
+
+    <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+          <!-- text - start -->
+          <div class="mb-10 md:mb-16">
+            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Get in touch</h2>
+      
+            <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+          </div>
+          <!-- text - end -->
+      
+          <!-- form - start -->
+          <form action="/addbook" method="post" onsubmit="return validateForm();" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
+            <div>
+              <label for="book_name" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Book Name*</label>
+              <input name="book_name" type="text" id="book_name" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+      
+            <div>
+              <label for="publisher" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Publisher*</label>
+              <input type="text" id="publisher" name="publisher" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+      
+            <div class="sm:col-span-2">
+              <label for="book_author" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Book Author*</label>
+              <input type="text" id="book_author" name="book_author" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+      
+            <div class="sm:col-span-2">
+              <label for="isbn_no" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">ISBN No*</label>
+              <input type="text" id="isbn_no" name="isbn_no" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+      
+            <div class="sm:col-span-2">
+              <label for="registration_date" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Registration Date*</label>
+              <input type="text" id="registration_date" name="registration_date" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+      
+            <div class="sm:col-span-2">
+                <label for="available" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Available*</label>
+                <input type="text" id="available" name="available" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+              </div>
+
+              <div class="sm:col-span-2">
+                <label for="price" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Price*</label>
+                <input type="text" id="price" name="price" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+              </div>
+      
+            <div class="flex items-center justify-between sm:col-span-2">
+              <button type="submit" value="Submit" class="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">Send</button>
+      
+              <span class="text-sm text-gray-500">*Required</span>
+            </div>
+      
+          </form>
+          <!-- form - end -->
+        </div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Additional styles or scripts can be added here -->
+    <style>
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            color: gray-300;
+            text-decoration: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 5px;
+            background-color: #4a5568;
+        }
+
+        .pagination a:hover {
+            background-color: #718096;
+        }
+
+        .pagination a.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="bg-gray-900"> <!-- Set dark background color -->
+    {% include 'navbar.html' %}
+    {% include 'bag.html' %}
+
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl text-gray-500 font-bold mb-8">Books</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {% for book in books %}
+            <div class="bg-gray-500 rounded-lg shadow-lg overflow-hidden">
+                <img src="{{ url_for('static', filename='Ebook-pana.png') }}" alt="{{ book[1] }}" class="w-full h-48 object-fill object-center">
+                <div class="p-4">
+                    <h2 class="text-xl font-bold mb-2">{{ book[1][:30] }}</h2>
+                    <p class="text-gray-600 mb-4">Category: {{ book[3] }}</p>
+                    <p class="text-gray-600 mb-4">ISBN: {{ book[5] }}</p>
+                    <p class="text-gray-600 mb-4">Price: ${{ book[6] }}</p>
+                    {% if book[7] %}
+                    <p class="text-green-600 font-semibold">Available</p>
+                    {% else %}
+                    <p class="text-red-600 font-semibold">Not Available</p>
+                    {% endif %}
+                    <!-- Add to cart button -->
+                    <form action="{{ url_for('addtocart') }}" method="post">
+                        <input type="hidden" name="book_id" value="{{ book[0] }}">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+                            Add to Cart
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination links -->
+        <div class="pagination">
+            {% if page > 1 %}
+            <a href="{{ url_for('books', page=page-1) }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                Backward
+            </a>
+            {% else %}
+            <a class="disabled bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-l">
+                Backward
+            </a>
+            {% endif %}
+
+            {% if page < total_books // per_page + 1 %}
+            <a href="{{ url_for('books', page=page+1) }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                Forward
+            </a>
+            {% else %}
+            <a class="disabled bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-r">
+                Forward
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

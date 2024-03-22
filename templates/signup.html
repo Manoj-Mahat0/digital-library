@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <title>Admin</title>
+    <!-- Include any CSS or Bootstrap links here -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+    <body class="bg-gray-100 dark:bg-gray-900">
+    <aside
+        class="fixed top-0 z-10 ml-[-100%] flex h-screen w-full flex-col justify-between border-r bg-white px-6 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] dark:bg-gray-800 dark:border-gray-700">
+        <div>
+            <div class="-mx-6 px-6 py-4">
+                <a href="#" title="home">
+                    <img src="{{ url_for('static', filename='Ebook-pana.png') }}" class="w-10" alt="tailus logo" />
+                </a>
+            </div>
+
+            <div class="mt-8 text-center">
+                <img src="{{ url_for('static', filename='messy bun-amico.png') }}" alt=""
+                    class="m-auto h-10 w-10 rounded-full object-fill lg:h-28 lg:w-28" />
+                <h5 class="mt-4 hidden text-xl font-semibold text-gray-600 lg:block dark:text-gray-300">Cynthia J. Watts
+                </h5>
+                <span class="hidden text-gray-400 lg:block">Admin</span>
+            </div>
+
+            <ul class="mt-8 space-y-2 tracking-wide">
+                <li>
+                    <a href="#" aria-label="dashboard"
+                        class="relative flex items-center space-x-4 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white">
+                        <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
+                                class="dark:fill-slate-600 fill-current text-cyan-400"></path>
+                            <path d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
+                                class="fill-current text-cyan-200 group-hover:text-cyan-300"></path>
+                            <path d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
+                                class="fill-current group-hover:text-sky-300"></path>
+                        </svg>
+                        <span class="-mr-1 font-medium">Dashboard</span>
+                    </a>
+                </li>
+                <li class="relative" id="categoriesDropdown">
+                    <a href="#" class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300" onclick="toggleDropdown()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path class="fill-current text-gray-300 group-hover:text-cyan-300" fill-rule="evenodd"
+                                d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z"
+                                clip-rule="evenodd" />
+                            <path
+                                class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-sky-400"
+                                d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z" />
+                        </svg>
+                        <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Categories</span>
+                    </a>
+                    <!-- Dropdown menu -->
+                    <ul id="dropdownMenu" class="absolute hidden bg-gray-400 rounded-md shadow-md py-2 w-48 z-10">
+                        <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Category 1</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Category 2</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Category 3</a></li>
+                    </ul>
+                </li>
+                
+                
+                <li>
+                    <a href="#"
+                        class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path
+                                class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-sky-400"
+                                fill-rule="evenodd"
+                                d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                                clip-rule="evenodd" />
+                            <path class="fill-current text-gray-300 group-hover:text-cyan-300"
+                                d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                        </svg>
+                        <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Author</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path
+                                class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-cyan-400"
+                                d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+                            <path class="fill-current text-gray-300 group-hover:text-cyan-300"
+                                d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+                        </svg>
+                        <span class="group-hover:text-gray-700 dark:group-hover:text-gray-50">Books</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path class="fill-current text-gray-300 group-hover:text-cyan-300"
+                                d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                            <path
+                                class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-sky-400"
+                                fill-rule="evenodd"
+                                d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="group-hover:text-gray-700 dark:group-hover:text-white">Finance</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path class="fill-current text-gray-300 group-hover:text-cyan-300"
+                                d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                            <path
+                                class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-sky-400"
+                                fill-rule="evenodd"
+                                d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="group-hover:text-gray-700 dark:group-hover:text-white">Issued Books</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600 dark:text-gray-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path class="fill-current text-gray-300 group-hover:text-cyan-300"
+                                d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                            <path
+                                class="fill-current text-gray-600 group-hover:text-cyan-600 dark:group-hover:text-sky-400"
+                                fill-rule="evenodd"
+                                d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="group-hover:text-gray-700 dark:group-hover:text-white">Student Registration</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        
+    </aside>
+    <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+        <div class="sticky top-0 h-16 border-b bg-white dark:bg-gray-800 dark:border-gray-700 lg:py-2.5">
+            <div class="flex items-center justify-between space-x-4 px-6 2xl:container">
+                <h5 hidden class="text-2xl font-medium text-gray-600 lg:block dark:text-white">Dashboard</h5>
+                <button class="-mr-2 h-16 w-12 border-r lg:hidden dark:border-gray-700 dark:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="my-auto h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <div class="flex space-x-4">
+                    <!--search bar -->
+                    <div hidden class="md:block">
+                        <div class="relative flex items-center text-gray-400 focus-within:text-cyan-400">
+                            <span
+                                class="absolute left-4 flex h-6 items-center border-r border-gray-300 pr-3 dark:border-gray-700">
+                                <svg xmlns="http://ww50w3.org/2000/svg" class="w-4 fill-current"
+                                    viewBox="0 0 35.997 36.004">
+                                    <path id="Icon_awesome-search" data-name="search"
+                                        d="M35.508,31.127l-7.01-7.01a1.686,1.686,0,0,0-1.2-.492H26.156a14.618,14.618,0,1,0-2.531,2.531V27.3a1.686,1.686,0,0,0,.492,1.2l7.01,7.01a1.681,1.681,0,0,0,2.384,0l1.99-1.99a1.7,1.7,0,0,0,.007-2.391Zm-20.883-7.5a9,9,0,1,1,9-9A8.995,8.995,0,0,1,14.625,23.625Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <input type="search" name="leadingIcon" id="leadingIcon" placeholder="Search here"
+                                class="outline-none w-full rounded-xl border border-gray-300 py-2.5 pl-14 pr-4 text-sm text-gray-600 transition focus:border-cyan-300 dark:bg-gray-900 dark:border-gray-700" />
+                        </div>
+                    </div>
+                    <!--/search bar -->
+                    <button aria-label="search"
+                        class="h-10 w-10 rounded-xl border bg-gray-100 active:bg-gray-200 md:hidden dark:bg-gray-700 dark:border-gray-600 dark:active:bg-gray-800">
+                        <svg xmlns="http://ww50w3.org/2000/svg"
+                            class="mx-auto w-4 fill-current text-gray-600 dark:text-gray-300"
+                            viewBox="0 0 35.997 36.004">
+                            <path id="Icon_awesome-search" data-name="search"
+                                d="M35.508,31.127l-7.01-7.01a1.686,1.686,0,0,0-1.2-.492H26.156a14.618,14.618,0,1,0-2.531,2.531V27.3a1.686,1.686,0,0,0,.492,1.2l7.01,7.01a1.681,1.681,0,0,0,2.384,0l1.99-1.99a1.7,1.7,0,0,0,.007-2.391Zm-20.883-7.5a9,9,0,1,1,9-9A8.995,8.995,0,0,1,14.625,23.625Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button aria-label="chat"
+                        class="h-10 w-10 rounded-xl border bg-gray-100 active:bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:active:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="m-auto h-5 w-5 text-gray-600 dark:text-gray-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                        </svg>
+                    </button>
+                    <a href="/signup" aria-label="Add User" class="flex justify-center items-center h-10 w-10 rounded-xl border bg-gray-100 active:bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:active:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 dark:text-gray-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                    </a>
+                    <a href="/logout" aria-label="notification" class="flex justify-center items-center h-10 w-10 rounded-xl border bg-gray-100 active:bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:active:bg-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 dark:text-gray-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                        </svg>
+                    </a>
+                    
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <div class="relative py-16 bg-gray-900">
+            <div class="container relative m-auto px-6 text-gray-500 md:px-12 xl:px-40">
+              <div class="m-auto space-y-8 md:w-8/12 lg:w-6/12 xl:w-6/12">
+                <div class="rounded-3xl border border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
+                  <div class="p-8 py-12 sm:p-16">
+                    <h2 class="mb-8 text-2xl font-bold text-gray-800 dark:text-white">Add New Student</h2>
+                    <form id="signupForm" action="" class="space-y-8">
+                      <div class="space-y-2">
+                        <label for="name" class="text-gray-600 dark:text-gray-300">Name</label>
+                        <input type="text" id="name" name="name" placeholder="name" required
+                          class="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
+                        />
+                      </div>
+                      <div class="space-y-2">
+                        <label for="username" class="text-gray-600 dark:text-gray-300">UserName</label>
+                        <input type="text" id="username" name="username" placeholder="Username" required
+                          class="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
+                        />
+                      </div>
+          
+                      <div>
+                        <div class="flex items-center justify-between">
+                          <label for="pwd" class="text-gray-600 dark:text-gray-300">Password</label>
+                          <button class="-mr-2 p-2" type="reset">
+                          </button>
+                        </div>
+                        <input type="password" id="password" name="password" placeholder="Password" required
+                          class="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
+                        />
+                      </div>
+          
+                      <button type="submit" id="submitButton" class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
+                        <span class="relative text-base font-semibold text-white dark:text-dark">Connect</span>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                <div class="space-x-4 text-center text-gray-500">
+                  <span>&copy; LMS</span>
+                  <a href="#" class="text-sm hover:text-primary">Contact</a>
+                  <a href="#" class="text-sm hover:text-primary">Privacy & Terms</a>
+                </div>
+              </div>
+            </div>
+          </div> 
+          
+          <!-- Success Popup -->
+          <div id="successPopup" class="fixed inset-0 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+              <p class="text-green-500 font-semibold text-center">Student added successfully!</p>
+              <button id="closeSuccessPopup" class="absolute top-0 right-0 mt-1 mr-1 text-gray-400 hover:text-gray-600">&times;</button>
+            </div>
+          </div>
+          
+          <!-- Error Popup -->
+          <div id="errorPopup" class="fixed inset-0 flex items-center justify-center hidden bg-gray-900 bg-opacity-75">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+              <p class="text-red-500 font-semibold text-center">Please fill all the fields!</p>
+              <button id="closeErrorPopup" class="absolute top-0 right-0 mt-1 mr-1 text-gray-400 hover:text-gray-600">&times;</button>
+            </div>
+          </div>
+    </div>
+</body>
+
+<script>
+    function toggleDropdown() {
+        var dropdownMenu = document.getElementById("dropdownMenu");
+        dropdownMenu.classList.toggle("hidden");
+    }
+</script>
+<script>
+    const signupForm = document.getElementById('signupForm');
+    const successPopup = document.getElementById('successPopup');
+    const errorPopup = document.getElementById('errorPopup');
+    const submitButton = document.getElementById('submitButton');
+    document.getElementById('closeSuccessPopup').addEventListener('click', function() {
+      document.getElementById('successPopup').classList.add('hidden');
+    });
+
+    // Close error popup
+    document.getElementById('closeErrorPopup').addEventListener('click', function() {
+      document.getElementById('errorPopup').classList.add('hidden');
+    });
+    signupForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(signupForm);
+      const name = formData.get('name');
+      const username = formData.get('username');
+      const password = formData.get('password');
+      
+      if (name && username && password) {
+        // Show success popup
+        successPopup.classList.remove('hidden');
+        // You can redirect or perform any action here after successful signup
+      } else {
+        // Show error popup
+        errorPopup.classList.remove('hidden');
+      }
+    });
+  </script>
+</html>
